@@ -15,9 +15,7 @@ function App() {
         const { data } = await axios.post('http://localhost:8000/download/', {
           url
         } );
-        setDownloadUrl(data.url_download);
-        console.log(data);
-      
+        setDownloadUrl(data.url_download);      
     } catch (error) {
       console.log(error)
     }
@@ -25,23 +23,37 @@ function App() {
 
   }
 
+  const download = () => {
+    const a = document.createElement('a');
+    a.href = downloadUrl;
+    a.click();
+    a.remove();
+    setDownloadUrl('');
+  }
+
   return (
-    <>
-      <div>
-        <h1 className='text-center'>Youtube Downloader</h1>
-        <form className='d-flex container' onSubmit={ handleSubmit }>
-          <label>Ingresa la url</label>
-          <input type="text" className='mx-3 form-control' value={ url } onChange={(e) => setUrl(e.target.value)}/>
-          <button type="submit"className='btn btn-primary' >Buscar</button>
+    <div className='vh-100 d-flex flex-column'>
+      <h1 className='d-flex justify-content-center'>
+        <p className='h1' style={{color: 'red'}}>Youtube</p> 
+        <p className='h1 text-secondary'>Downloader</p>
+        </h1>
+      <div className=' m-auto col-6'>
+        <h5 className='text-center'>Ingresa el link</h5>
+        <form className='d-flex flex-column flex-sm-row flex-lg-row' onSubmit={ handleSubmit }>
+          <input type="text" className='form-control' value={ url } onChange={(e) => setUrl(e.target.value)}/>
+          <button type="submit"className='btn btn-outline-primary col-12 col-sm-4 col-lg-3'  >Buscar</button>
         </form>
       </div>
-    <br />
       <div>
         {
-          downloadUrl && <a type='button' className='btn btn-primary' href={ downloadUrl } target='_blank'>Descargar</a>
+          downloadUrl && 
+          <div>
+            <button className='btn btn-primary' onClick={ download }>Descargar</button>
+          </div>
+          
         }
       </div>
-    </>
+    </div>
   )
 }
 
