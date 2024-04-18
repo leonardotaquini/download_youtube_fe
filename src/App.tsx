@@ -17,7 +17,7 @@ function App() {
     setIsLoading(true);
     try {
         setDownloadUrl('');
-        const { data } = await axios.post('https://download-youtube-o9lv.onrender.com/download/', {
+        const { data } = await axios.post('http://localhost:8000/download/', {
           url
         } );
         setDownloadUrl(data.url_download); 
@@ -37,6 +37,7 @@ function App() {
     a.click();
     a.remove();
     setDownloadUrl('');
+    
   }
 
   return (
@@ -51,7 +52,7 @@ function App() {
         <h5 className='text-center'>Ingresa el link</h5>
         <form className='d-flex flex-column flex-sm-row flex-lg-row ' onSubmit={ handleSubmit }>
           <input type="text" className='form-control m-2' value={ url } onChange={(e) => setUrl(e.target.value)}/>
-          <button type="submit"className='btn btn-outline-primary col-12 col-sm-4 col-lg-3 m-2'  >Buscar</button>
+          <button type="submit"className='btn btn-outline-primary col-12 col-sm-4 col-lg-3 m-2' disabled={ isLoading } >Buscar</button>
         </form>
       </div>
       <div className='my-5'>
