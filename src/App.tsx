@@ -17,7 +17,7 @@ function App() {
     setIsLoading(true);
     try {
         setDownloadUrl('');
-        const { data } = await axios.post('http://localhost:8000/download/', {
+        const { data } = await axios.post('https://download-youtube-o9lv.onrender.com/download/', {
           url
         } );
         setDownloadUrl(data.url_download); 
